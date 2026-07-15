@@ -1,44 +1,30 @@
-# Enterprise Inventory & Retail Management Portal
+# IT Service Management (ITSM) & ITIL v4 Compliance Workflow
 
-Une application web d'administration d'inventaire et de gestion de commandes, développée en architecture découplée avec **Next.js**, des **Server Actions** et un modèle d'accès aux données de type **DAO (Data Access Object)**.
-
----
-
-## 🛠️ Stack Technique & Architecture Logicielle
-
-* **Frontend Framework** : Next.js (App Router) exploitant le rendu hybride (Static & Dynamic) pour une navigation fluide et performante.
-* **UI/UX Design** : Construit à l'aide de **NextUI** et **Tailwind CSS**, offrant une interface d'administration épurée, responsive et accessible.
-* **Server Actions** : Gestion asynchrone des formulaires et des mutations de données sans chargement de page (`clientActions`, `orderActions`, `productActions`), garantissant une expérience utilisateur moderne.
-* **Data Access Layer (DAO)** : Séparation stricte de la logique métier et de la persistance via un pattern DAO (`dao_client`, `dao_order`, `dao_product`), assurant un typage robuste côté backend.
+Ce dépôt rassemble les livrables d'ingénierie ITSM, de gouvernance informatique et de processus de gestion des incidents basés sur le référentiel **ITIL v4** via la solution **GLPI**[cite: 3]. 
 
 ---
 
-## 🔒 Focus Cybersécurité & Hardening
+## 🏗️ Architecture & Composants du Répertoire
 
-* **Prévention des Injections (SQLi)** : Les Data Access Objects (DAOs) sont isolés et utilisent des requêtes préparées paramétrées (`dao_connection.ts`), neutralisant les risques d'exploitation de vulnérabilités SQL (OWASP Top 10 - Injection).
-* **Isolation des Configurations** : Gestion stricte des variables d'environnement via un fichier `.env` privé, éliminant tout risque de fuite d'identifiants (*hardcoded credentials*) sur le dépôt distant.
-* **Typage Stricte TypeScript** : Implémentation de définitions de types exhaustives (`.d.ts`) pour toutes les entités métiers (Client, Line, Order, Product), prévenant les comportements instables de l'application en production.
-
----
-
-## 📊 Structure des Données (Modèle Relationnel)
-
-L'application organise les flux commerciaux à travers une modélisation transactionnelle normalisée :
-* **Client** : Profil des acheteurs professionnels ou particuliers.
-* **Product** : Catalogue de l'inventaire avec tarification et description dynamique.
-* **Order** : En-tête des transactions liant les clients aux commandes de vente.
-* **Line** : Lignes d'association de commande, définissant la quantité et le prix unitaire d'un produit spécifique au sein d'une transaction parent.
+* **`/database`** : Schéma relationnel d'indexation SQL de la base de données de ticketing de production (`ticket_db_schema.sql`).
+* **`/documentation`** : Documents de gouvernance, politiques d'utilisation des systèmes (AUP), logigrammes d'escalade d'incidents (SLA/Slo) et guides opérationnels de sensibilisation de l'utilisateur final.
+* **`/presentation`** : Support de formation et d'onboarding technique sur l'outil de gestion de parc et de ticketing GLPI.
 
 ---
 
-## 📂 Architecture des Dossiers
+## 🛡️ Processus de Support & Alignement Cyber
+
+L'intégralité du cycle de vie des requêtes a été modélisée selon les directives ITIL v4 afin de maximiser la disponibilité opérationnelle des systèmes :
+1. **Incident Management (N1/N2/N3)** : Logigramme complet de qualification, de priorisation automatique (Matrice d'Urgence / Impact) et de résolution des pannes critiques.
+2. **Acceptable Use Policies (AUP)** : Charte de conformité régissant l'usage éthique et sécurisé de l'Intelligence Artificielle en entreprise.
+3. **User Awareness Program** : Manuel technique de sensibilisation au Phishing et ingénierie sociale pour endiguer le vecteur d'attaque d'intrusion initial le plus critique (Human-as-a-Security-Sensor).
+
+---
+
+## 📂 Structure du Dépôt
 
 ```text
 .
-├── actions/                  # Couche d'orchestration (Server Actions pour les mutations)
-├── app/                      # Routage applicatif Next.js et API endpoints d'intégration
-├── component/                # Composants réutilisables d'interface (Navbar, Providers, Connectors)
-├── constants/                # Déclaration des routes et constantes globales
-├── dao/                      # Data Access Objects (Requêtes préparées d'accès à la base de données)
-├── public/                   # Assets graphiques statiques
-└── types/                    # Déclarations de types TypeScript strictes
+├── database/                    # Schéma relationnel de la base SQL (GLPI Ticketing)
+├── documentation/               # logigrammes, chartes de conformité et guides de gestion de crise (SOPs)
+└── presentation/                # Slides techniques de formation utilisateur et d'onboarding sur GLPI
